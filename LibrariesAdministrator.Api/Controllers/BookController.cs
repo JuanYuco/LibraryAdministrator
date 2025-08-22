@@ -59,7 +59,7 @@ namespace LibrariesAdministrator.Api.Controllers
                 return StatusCode(response.HttpCode, response.UserMessage);
             }
 
-            return Ok(response.UserMessage);
+            return Ok(new { response.UserMessage });
         }
 
         [HttpPut("Update")]
@@ -71,7 +71,7 @@ namespace LibrariesAdministrator.Api.Controllers
                 return StatusCode(response.HttpCode, response.UserMessage);
             }
 
-            return Ok(response.UserMessage);
+            return Ok(new { response.UserMessage });
         }
 
         [HttpDelete("Delete/{id}")]
@@ -83,7 +83,7 @@ namespace LibrariesAdministrator.Api.Controllers
                 return StatusCode(response.HttpCode, response.UserMessage);
             }
 
-            return Ok(response.UserMessage);
+            return Ok(new { response.UserMessage });
         }
     }
 }

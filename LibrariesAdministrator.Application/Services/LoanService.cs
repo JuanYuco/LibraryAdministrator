@@ -78,16 +78,12 @@ namespace LibrariesAdministrator.Application.Services
                     LibraryId = loanEntity.LibraryId,
                     StartDate = loanEntity.StartDate,
                     EndDate = loanEntity.EndDate,
-                    Books = new List<LoanBook>()
+                    BooksIds = new List<int>()
                 };
 
                 foreach (var bookLibrary in loanEntity.BookByLoans)
                 {
-                    loan.Books.Add(new LoanBook
-                    {
-                        Id = bookLibrary.BookId,
-                        Title = bookLibrary.Book.Title
-                    });
+                    loan.BooksIds.Add(bookLibrary.BookId);
                 }
 
                 result.Entity = loan;

@@ -45,6 +45,35 @@ namespace LibrariesAdministrator.Application.Services
             return result;
         }
 
+        public async Task<MemberMinifiedCollectionResponseDTO> GetAllActiveAsync(MemberMinifiedRequestDTO request)
+        {
+            var result = new MemberMinifiedCollectionResponseDTO() { Successful = false };
+
+            try
+            {
+                result.EntityCollection = new List<MemberMinifiedDTO>();
+                var membersEntities = await _memberRepository.GetAllActiveAsync();
+                foreach (var memberEntity in membersEntities)
+                {
+                    result.EntityCollection.Add(new MemberMinifiedDTO
+                    {
+                        Id = memberEntity.Id,
+                        FullName = memberEntity.FullName
+                    });
+                }
+
+                result.Successful = true;
+            }
+            catch (Exception ex)
+            {
+                result.UserMessage = "Ocurrió un error consultando los miembros.";
+                result.InternalErrorMessage = ex.Message;
+                result.HttpCode = 500;
+            }
+
+            return result;
+        }
+
         public async Task<MemberFullInfoResponseDTO> GetByIdAsync(int id)
         {
             var result = new MemberFullInfoResponseDTO() { Successful = false };

@@ -75,16 +75,12 @@ namespace LibrariesAdministrator.Application.Services
                     Title = bookEntity.Title,
                     Author = bookEntity.Author,
                     Gender = bookEntity.Gender,
-                    Libraries = new List<BookLibrary>()
+                    LibrariesIds = new List<int>()
                 };
 
                 foreach (var bookLibrary in bookEntity.BookByLibraries)
                 {
-                    book.Libraries.Add(new BookLibrary
-                    {
-                        Id = bookLibrary.LibraryId,
-                        Name = bookLibrary.Library.Name
-                    });
+                    book.LibrariesIds.Add(bookLibrary.LibraryId);
                 }
 
                 result.Entity = book;
@@ -266,7 +262,7 @@ namespace LibrariesAdministrator.Application.Services
 
         public async Task<BookDeleteResponseDTO> DeleteAsync(int id)
         {
-            var result = new BookDeleteResponseDTO() { Successful = true };
+            var result = new BookDeleteResponseDTO() { Successful = false };
 
             try
             {
@@ -293,7 +289,7 @@ namespace LibrariesAdministrator.Application.Services
 
                 await _bookRepository.UpdateAsync(bookEntity);
 
-                result.UserMessage = "El libro fue eliminada.";
+                result.UserMessage = "El libro fue eliminado.";
                 result.Successful = true;
             }
             catch (Exception ex)
@@ -313,32 +309,32 @@ namespace LibrariesAdministrator.Application.Services
             List<string> errorMessages = new List<string>();
             if (string.IsNullOrWhiteSpace(request.Title))
             {
-                errorMessages.Add("El titulo es obligatorio");
+                errorMessages.Add(" El título es obligatorio");
             }
 
             if (request.Title.Length > 100)
             {
-                errorMessages.Add("El titulo supera los 100 caracteres");
+                errorMessages.Add(" El título supera los 100 caracteres");
             }
 
             if (string.IsNullOrEmpty(request.Author))
             {
-                errorMessages.Add("El autor es obligatorio");
+                errorMessages.Add(" El autor es obligatorio");
             }
 
             if (request.Author.Length > 100)
             {
-                errorMessages.Add("El autor supera los 100 caracteres");
+                errorMessages.Add(" El autor supera los 100 caracteres");
             }
 
             if (string.IsNullOrEmpty(request.Gender))
             {
-                errorMessages.Add("El género es obligatorio");
+                errorMessages.Add(" El género es obligatorio");
             }
 
             if (request.Gender.Length > 100)
             {
-                errorMessages.Add("El autor supera los 100 caracteres");
+                errorMessages.Add(" El género supera los 100 caracteres");
             }
 
             if (errorMessages.Count > 0)

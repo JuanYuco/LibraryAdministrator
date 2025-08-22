@@ -36,7 +36,7 @@ namespace LibrariesAdministrator.Infrastructure.Adapters
         public async Task<Book> GetByIdAsync(int id)
         {
             return await _context.Books
-                .Include(x => x.BookByLibraries).ThenInclude(x => x.Library)
+                .Include(x => x.BookByLibraries.Where(x=> !x.IsDeleted)).ThenInclude(x => x.Library)
                 .Include(x => x.BookByLoans)
                 .Where(x => x.Id == id).FirstOrDefaultAsync();
         }

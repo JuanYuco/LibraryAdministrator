@@ -5,6 +5,7 @@ namespace LibrariesAdministrator.Application.Interfaces
     public interface IMemberService
     {
         Task<MemberCollectionResponseDTO> GetAllAsync(MemberCollectionRequestDTO request);
+        Task<MemberMinifiedCollectionResponseDTO> GetAllActiveAsync(MemberMinifiedRequestDTO request);
         Task<MemberFullInfoResponseDTO> GetByIdAsync(int id);
         Task<MemberToSaveResponseDTO> CreateAsync(MemberToSaveRequestDTO request);
         Task<MemberToSaveResponseDTO> UpdateAsync(MemberToSaveRequestDTO request);

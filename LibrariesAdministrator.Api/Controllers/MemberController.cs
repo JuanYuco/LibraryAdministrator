@@ -27,6 +27,18 @@ namespace LibrariesAdministrator.Api.Controllers
             return Ok(response.EntityCollection);
         }
 
+        [HttpGet("GetAllActive")]
+        public async Task<IActionResult> GetAllActive()
+        {
+            var response = await _memberService.GetAllActiveAsync(new MemberMinifiedRequestDTO());
+            if (!response.Successful)
+            {
+                return StatusCode(response.HttpCode, response.UserMessage);
+            }
+
+            return Ok(response.EntityCollection);
+        }
+
         [HttpGet("GetById/{id}")]
         public async Task<IActionResult> GetAll([FromRoute] int id)
         {
@@ -48,7 +60,7 @@ namespace LibrariesAdministrator.Api.Controllers
                 return StatusCode(response.HttpCode, response.UserMessage);
             }
 
-            return Ok(response.UserMessage);
+            return Ok(new { response.UserMessage });
         }
 
         [HttpPut("Update")]
@@ -60,7 +72,7 @@ namespace LibrariesAdministrator.Api.Controllers
                 return StatusCode(response.HttpCode, response.UserMessage);
             }
 
-            return Ok(response.UserMessage);
+            return Ok(new { response.UserMessage });
         }
 
         [HttpDelete("Delete/{id}")]
@@ -69,10 +81,10 @@ namespace LibrariesAdministrator.Api.Controllers
             var response = await _memberService.DeleteAsync(id);
             if (!response.Successful)
             {
-                return StatusCode(response.HttpCode, response.UserMessage);
+                return StatusCode(response.HttpCode, response.UserMessage );
             }
 
-            return Ok(response.UserMessage);
+            return Ok(new { response.UserMessage });
         }
     }
 }

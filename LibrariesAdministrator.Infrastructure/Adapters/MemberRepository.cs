@@ -17,6 +17,11 @@ namespace LibrariesAdministrator.Infrastructure.Adapters
             return await _context.Members.Where(x => !x.IsDeleted).ToListAsync();
         }
 
+        public async Task<List<Member>> GetAllActiveAsync()
+        {
+            return await _context.Members.Where(x => !x.IsDeleted && x.Active).ToListAsync();
+        }
+
         public async Task<Member> GetByIdAsync(int id)
         {
             return await _context.Members.Include(x => x.Loans).Where(x => x.Id == id).FirstOrDefaultAsync();

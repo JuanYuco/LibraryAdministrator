@@ -8,5 +8,6 @@ namespace LibrariesAdministrator.Domain.Ports
         Task<Member> GetByIdAsync(int id);
         Task<Member> CreateAsync(Member library);
         Task<Member> UpdateAsync(Member library);
+        Task<List<Member>> GetAllActiveAsync();
     }
 }

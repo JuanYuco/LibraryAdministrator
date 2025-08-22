@@ -186,7 +186,7 @@ namespace LibrariesAdministrator.Application.Services
 
         public async Task<LibraryDeleteResponseDTO> DeleteAsync(int id)
         {
-            var result = new LibraryDeleteResponseDTO() { Successful = true };
+            var result = new LibraryDeleteResponseDTO() { Successful = false };
 
             try
             {
